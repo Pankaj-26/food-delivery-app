@@ -10,8 +10,10 @@ const [token,setToken]=useState("")
 const [foodList,setFoodList]=useState([])
 
 
-  const url="http://localhost:4000"
+  const url=import.meta.env.VITE_Backend_URL || "http://localhost:4000" 
 
+  // VITE_Backend_URL
+  
 
 
   const addToCart = async(itemId) => {
