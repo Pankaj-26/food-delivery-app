@@ -25,20 +25,25 @@ const LoginPopup = ({ setShowLogin }) => {
 
     let newUrl = url;
 
-    if (currentState === "Login") {
-      newUrl += "/api/user/login";
-      const response = await axios.post(newUrl, data);
+ if (currentState === "Login") {
+  newUrl += "/api/user/login";
+} else {
+  newUrl += "/api/user/register";
+}
 
-      if (response.data.success) {
-        setToken(response.data.token);
-        localStorage.setItem("token", response.data.token);
-        setShowLogin(false);
-      } else {
-        alert(response.data.message);
-      }
-    } else {
-      newUrl += "/api/user/register";
-    }
+try {
+  const response = await axios.post(newUrl, data);
+  if (response.data.success) {
+    setToken(response.data.token);
+    localStorage.setItem("token", response.data.token);
+    setShowLogin(false);
+  } else {
+    alert(response.data.message);
+  }
+} catch (error) {
+  alert("Something went wrong! Please try again.");
+}
+
   };
 
   return (
@@ -58,8 +63,8 @@ const LoginPopup = ({ setShowLogin }) => {
           ) : (
             <input
               type="text"
-              name="email"
-              value={data.value}
+              name="name"
+              value={data.name}
               onChange={onChangeHandler}
               placeholder="your name"
               required
@@ -78,6 +83,7 @@ const LoginPopup = ({ setShowLogin }) => {
             type="text"
             name="password"
             placeholder="password"
+            value={data.password}
             onChange={onChangeHandler}
             required
           />
