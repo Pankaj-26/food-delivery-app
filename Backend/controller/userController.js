@@ -46,6 +46,7 @@ const createToken=(id)=>{
 
 const registerUser=async(req,res)=>{
     const {name,email,password}=req.body;
+    console.log(req.body)
     try{
         const exist=await userModel.findOne({email})
 

@@ -30,9 +30,14 @@ const LoginPopup = ({ setShowLogin }) => {
 } else {
   newUrl += "/api/user/register";
 }
+console.log(newUrl)
 
 try {
-  const response = await axios.post(newUrl, data);
+  const response = await axios.post(newUrl, data, {
+    headers: {
+      "Content-Type": "application/json", // Ensure the server expects JSON
+    },
+  });
   if (response.data.success) {
     setToken(response.data.token);
     localStorage.setItem("token", response.data.token);
@@ -41,6 +46,8 @@ try {
     alert(response.data.message);
   }
 } catch (error) {
+  console.error("Error response:", error.response ? error.response.data : error.message);
+
   alert("Something went wrong! Please try again.");
 }
 

@@ -76,9 +76,9 @@ const [foodList,setFoodList]=useState([])
 
   useEffect(()=>{
   
-
+    fetchFoodList()
 async function  loadData(){
-  await fetchFoodList()
+  // await fetchFoodList()
   const token=localStorage.getItem("token")
   if(token){
 
