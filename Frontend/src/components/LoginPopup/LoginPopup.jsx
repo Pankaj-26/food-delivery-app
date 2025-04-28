@@ -48,7 +48,7 @@ try {
 } catch (error) {
   console.error("Error response:", error.response ? error.response.data : error.message);
 
-  alert("Something went wrong! Please try again.");
+  alert("User Already Exist.");
 }
 
   };
